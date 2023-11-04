@@ -1,15 +1,12 @@
 # 亮钻科技SDK
 
-使用该SDK之前需要先获取系统权限, `AndroidMainfest.xml`中需要加入`<uses-permission android:name="android.permission.READ_PRIVILEGED_PHONE_STATE" tools:ignore="ProtectedPermissions" />`
+使用该SDK之前需要先获取系统权限, `AndroidMainfest.xml`中需要设定`android:sharedUserId="android.uid.system"`
 
 例如: 
 ```xml
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.liasica.liontron">
-
-    <uses-permission android:name="android.permission.READ_PRIVILEGED_PHONE_STATE"
-        tools:ignore="ProtectedPermissions" />
+    android:sharedUserId="android.uid.system">
 </manifest>
 ```
 
