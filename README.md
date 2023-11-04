@@ -1,15 +1,9 @@
-# liontron
+# 亮钻科技SDK
 
-A new Flutter plugin project.
-
-## Getting Started
-
-This project is a starting point for a Flutter
-[plug-in package](https://flutter.dev/developing-packages/),
-a specialized package that includes platform-specific implementation code for
-Android and/or iOS.
-
-For help getting started with Flutter development, view the
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
-
+## 实现功能
+- `getEthMacAddress` 获取网口Mac地址
+- `getSerialNumber` 获取序列号(需要获取系统权限`7.1-11`)
+- `getInternalStoragePath` 获取内部存储路径
+- `getStorageCardPath` 获取存储卡路径
+- `getUsbStoragePath` 获取USB存储路径
+- `getStorageSize` 获取存储大小

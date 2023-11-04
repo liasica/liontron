@@ -34,4 +34,20 @@ abstract class LiontronPlatform extends PlatformInterface {
   Future<String?> getSerialNumber() {
     throw UnimplementedError('getSerialNumber() has not been implemented.');
   }
+
+  Future<String?> getInternalStoragePath() {
+    throw UnimplementedError('getInternalStoragePath() has not been implemented.');
+  }
+
+  Future<String?> getStorageCardPath() {
+    throw UnimplementedError('getStorageCardPath() has not been implemented.');
+  }
+
+  Future<String?> getUsbStoragePath() {
+    throw UnimplementedError('getUsbStoragePath() has not been implemented.');
+  }
+
+  Future<Map<String, dynamic>?> getStorageSize(String path) {
+    throw UnimplementedError('getStorageSize() has not been implemented.');
+  }
 }

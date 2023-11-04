@@ -2,6 +2,7 @@ package com.liasica.liontron
 
 import android.annotation.SuppressLint
 import android.os.Build
+import android.os.StatFs
 import com.lztek.toolkit.Lztek
 import io.flutter.embedding.engine.plugins.FlutterPlugin
 import io.flutter.embedding.engine.plugins.FlutterPlugin.FlutterPluginBinding
@@ -31,6 +32,10 @@ class LiontronPlugin : FlutterPlugin, MethodCallHandler {
             "getPlatformVersion" -> getPlatformVersion(result)
             "getEthMacAddress" -> getEthMacAddress(result)
             "getSerialNumber" -> getSerialNumber(result)
+            "getInternalStoragePath" -> getInternalStoragePath(result)
+            "getStorageCardPath" -> getStorageCardPath(result)
+            "getUsbStoragePath" -> getUsbStoragePath(result)
+            "getStorageSize" -> getStorageSize(call, result)
             else -> result.notImplemented()
         }
     }
@@ -56,5 +61,26 @@ class LiontronPlugin : FlutterPlugin, MethodCallHandler {
                 Build.SERIAL ?: ""
             }
         )
+    }
+
+    private fun getInternalStoragePath(result: Result) {
+        result.success(lztek.internalStoragePath)
+    }
+
+    private fun getStorageCardPath(result: Result) {
+        result.success(lztek.storageCardPath)
+    }
+
+    private fun getUsbStoragePath(result: Result) {
+        result.success(lztek.usbStoragePath)
+    }
+
+    private fun getStorageSize(call: MethodCall, result: Result) {
+        val path = call.arguments as String
+        val statfs = StatFs(path)
+        val blocSize = statfs.blockSizeLong
+        val availableSize = statfs.availableBlocksLong * blocSize
+        val totalSize = statfs.blockCountLong * blocSize
+        result.success(hashMapOf("totalSize" to totalSize, "availableSize" to availableSize))
     }
 }

@@ -3,6 +3,7 @@ import 'dart:async';
 
 import 'package:flutter/services.dart';
 import 'package:liontron/liontron.dart';
+import 'package:liontron/models/storage_size.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -20,6 +21,10 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   String _platformVersion = 'Unknown';
   String _serialNumber = 'Unknown';
+  String _internalStoragePath = 'Unknown';
+  String _storageCardPath = 'Unknown';
+  String _usbStoragePath = 'Unknown';
+  StorageSize _internalStorageSize = StorageSize();
 
   final _liontronPlugin = Liontron();
 
@@ -46,9 +51,17 @@ class _MyAppState extends State<MyApp> {
     if (!mounted) return;
 
     _serialNumber = await _liontronPlugin.getSerialNumber() ?? 'Unknown serial number';
+    _internalStoragePath = await _liontronPlugin.getInternalStoragePath() ?? 'Unknown internal storage path';
+    _storageCardPath = await _liontronPlugin.getStorageCardPath() ?? 'Unknown storage card path';
+    _usbStoragePath = await _liontronPlugin.getUsbStoragePath() ?? 'Unknown usb storage path';
+    _internalStorageSize = await _liontronPlugin.getStorageSize(_internalStoragePath) ?? StorageSize();
 
     print('getEthMacAddress:       ${await _liontronPlugin.getEthMacAddress()}');
     print('getSerialNumber:        $_serialNumber');
+    print('getInternalStoragePath: $_internalStoragePath');
+    print('getStorageCardPath:     $_storageCardPath');
+    print('getUsbStoragePath:      $_usbStoragePath');
+    print('getStorageSize:         ${_internalStorageSize.toJson()}');
     setState(() {
       _platformVersion = platformVersion;
       _serialNumber = _serialNumber;
