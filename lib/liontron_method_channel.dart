@@ -16,8 +16,8 @@ class MethodChannelLiontron extends LiontronPlatform {
   }
 
   @override
-  Future<String?> getMacAddress() async {
-    return await methodChannel.invokeMethod<String>('getMacAddress');
+  Future<String?> getEthMacAddress() async {
+    return await methodChannel.invokeMethod<String>('getEthMacAddress');
   }
 
   @override

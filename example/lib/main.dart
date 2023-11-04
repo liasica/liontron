@@ -19,6 +19,8 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   String _platformVersion = 'Unknown';
+  String _serialNumber = 'Unknown';
+
   final _liontronPlugin = Liontron();
 
   @override
@@ -43,10 +45,13 @@ class _MyAppState extends State<MyApp> {
     // setState to update our non-existent appearance.
     if (!mounted) return;
 
-    print('getMacAddress:       ${await _liontronPlugin.getMacAddress()}');
-    print('getSerialNumber:     ${await _liontronPlugin.getSerialNumber()}');
+    _serialNumber = await _liontronPlugin.getSerialNumber() ?? 'Unknown serial number';
+
+    print('getEthMacAddress:       ${await _liontronPlugin.getEthMacAddress()}');
+    print('getSerialNumber:        $_serialNumber');
     setState(() {
       _platformVersion = platformVersion;
+      _serialNumber = _serialNumber;
     });
   }
 
@@ -58,7 +63,7 @@ class _MyAppState extends State<MyApp> {
           title: const Text('Plugin example app'),
         ),
         body: Center(
-          child: Text('Running on: $_platformVersion\n'),
+          child: Text('Running on: $_platformVersion -> [$_serialNumber]\n'),
         ),
       ),
     );

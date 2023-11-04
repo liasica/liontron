@@ -27,8 +27,8 @@ abstract class LiontronPlatform extends PlatformInterface {
     throw UnimplementedError('platformVersion() has not been implemented.');
   }
 
-  Future<String?> getMacAddress() {
-    throw UnimplementedError('getMacAddress() has not been implemented.');
+  Future<String?> getEthMacAddress() {
+    throw UnimplementedError('getEthMacAddress() has not been implemented.');
   }
 
   Future<String?> getSerialNumber() {

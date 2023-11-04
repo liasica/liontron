@@ -5,8 +5,8 @@ class Liontron {
     return LiontronPlatform.instance.getPlatformVersion();
   }
 
-  Future<String?> getMacAddress() {
-    return LiontronPlatform.instance.getMacAddress();
+  Future<String?> getEthMacAddress() {
+    return LiontronPlatform.instance.getEthMacAddress();
   }
 
   Future<String?> getSerialNumber() {

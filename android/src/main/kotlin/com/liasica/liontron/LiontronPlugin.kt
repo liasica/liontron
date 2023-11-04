@@ -1,16 +1,7 @@
 package com.liasica.liontron
 
 import android.annotation.SuppressLint
-import android.content.Context
-import android.net.ConnectivityManager
-import android.net.ConnectivityManager.NetworkCallback
-import android.net.Network
-import android.net.NetworkCapabilities
-import android.net.NetworkRequest
-import android.net.wifi.WifiInfo
-import android.net.wifi.WifiManager
 import android.os.Build
-import androidx.annotation.RequiresApi
 import com.lztek.toolkit.Lztek
 import io.flutter.embedding.engine.plugins.FlutterPlugin
 import io.flutter.embedding.engine.plugins.FlutterPlugin.FlutterPluginBinding
@@ -29,7 +20,7 @@ class LiontronPlugin : FlutterPlugin, MethodCallHandler {
     private lateinit var channel: MethodChannel
     private lateinit var lztek: Lztek
 
-    override fun onAttachedToEngine(flutterPluginBinding: FlutterPlugin.FlutterPluginBinding) {
+    override fun onAttachedToEngine(flutterPluginBinding: FlutterPluginBinding) {
         channel = MethodChannel(flutterPluginBinding.binaryMessenger, "liontron")
         channel.setMethodCallHandler(this)
         lztek = Lztek.create(flutterPluginBinding.applicationContext)
@@ -38,30 +29,31 @@ class LiontronPlugin : FlutterPlugin, MethodCallHandler {
     override fun onMethodCall(call: MethodCall, result: Result) {
         when (call.method) {
             "getPlatformVersion" -> getPlatformVersion(result)
-            "getMacAddress" -> getMacAddress(result)
+            "getEthMacAddress" -> getEthMacAddress(result)
             "getSerialNumber" -> getSerialNumber(result)
             else -> result.notImplemented()
         }
     }
 
-    override fun onDetachedFromEngine(binding: FlutterPlugin.FlutterPluginBinding) {
+    override fun onDetachedFromEngine(binding: FlutterPluginBinding) {
         channel.setMethodCallHandler(null)
     }
 
     private fun getPlatformVersion(result: Result) {
-        result.success("Android ${android.os.Build.VERSION.RELEASE}")
+        result.success("Android ${Build.VERSION.RELEASE}")
     }
 
-    private fun getMacAddress(result: Result) {
+    private fun getEthMacAddress(result: Result) {
         result.success(lztek.ethMac)
     }
 
+    @SuppressLint("HardwareIds")
     private fun getSerialNumber(result: Result) {
         result.success(
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
                 Build.getSerial() ?: ""
             } else {
-                ""
+                Build.SERIAL ?: ""
             }
         )
     }
