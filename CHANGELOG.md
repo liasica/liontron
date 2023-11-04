@@ -1,3 +1,8 @@
+## 0.0.2
+
+* 获取亮钻root权限
+
+
 ## 0.0.1
 
-* TODO: Describe initial release.
+* 发布亮钻SDK
