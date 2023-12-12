@@ -11,7 +11,8 @@ class MethodChannelLiontron extends LiontronPlatform {
 
   @override
   Future<String?> getPlatformVersion() async {
-    final version = await methodChannel.invokeMethod<String>('getPlatformVersion');
+    final version =
+        await methodChannel.invokeMethod<String>('getPlatformVersion');
     return version;
   }
 
@@ -44,5 +45,41 @@ class MethodChannelLiontron extends LiontronPlatform {
   Future<Map<String, dynamic>?> getStorageSize(String path) async {
     final result = await methodChannel.invokeMethod('getStorageSize', path);
     return result == null ? null : Map<String, dynamic>.from(result);
+  }
+
+  @override
+  Future<String?> installApplication(String apkPath) async {
+    return await methodChannel.invokeMethod<String>(
+      'installApplication',
+      {'apkPath': apkPath},
+    );
+  }
+
+  @override
+  Future<bool?> setKeepAlive(
+    String packageName, {
+    bool? unset = false,
+    int? delaySeconds = 5,
+    bool? foreground = true,
+  }) async {
+    return await methodChannel.invokeMethod<bool>('setKeepAlive', {
+      'packageName': packageName,
+      'unset': unset,
+      'delaySeconds': delaySeconds,
+      'foreground': foreground,
+    });
+  }
+
+  @override
+  Future<bool?> setBoot(
+    String packageName, {
+    bool? unset = false,
+    int? delaySeconds = 5,
+  }) async {
+    return await methodChannel.invokeMethod<bool>('setBoot', {
+      'packageName': packageName,
+      'unset': unset,
+      'delaySeconds': delaySeconds,
+    });
   }
 }

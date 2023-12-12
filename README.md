@@ -17,3 +17,6 @@
 - `getStorageCardPath` 获取存储卡路径
 - `getUsbStoragePath` 获取USB存储路径
 - `getStorageSize` 获取存储大小
+- `installApplication` 应用静默安装
+- `setKeepAlive` 设置应用保活
+- `setBoot` 设置开机自启动
