@@ -36,7 +36,8 @@ abstract class LiontronPlatform extends PlatformInterface {
   }
 
   Future<String?> getInternalStoragePath() {
-    throw UnimplementedError('getInternalStoragePath() has not been implemented.');
+    throw UnimplementedError(
+        'getInternalStoragePath() has not been implemented.');
   }
 
   Future<String?> getStorageCardPath() {
@@ -49,5 +50,26 @@ abstract class LiontronPlatform extends PlatformInterface {
 
   Future<Map<String, dynamic>?> getStorageSize(String path) {
     throw UnimplementedError('getStorageSize() has not been implemented.');
+  }
+
+  Future<String?> installApplication(String apkPath) {
+    throw UnimplementedError('installApplication() has not been implemented.');
+  }
+
+  Future<bool?> setKeepAlive(
+    String packageName, {
+    bool? unset = false,
+    int? delaySeconds = 5,
+    bool? foreground = true,
+  }) {
+    throw UnimplementedError('setKeepAlive() has not been implemented.');
+  }
+
+  Future<bool?> setBoot(
+    String packageName, {
+    bool? unset = false,
+    int? delaySeconds = 5,
+  }) {
+    throw UnimplementedError('setBoot() has not been implemented.');
   }
 }

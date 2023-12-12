@@ -38,4 +38,37 @@ class Liontron {
     final result = await LiontronPlatform.instance.getStorageSize(path);
     return result == null ? null : StorageSize.fromJson(result);
   }
+
+  /// 应用静默安装
+  Future<String?> installApplication(String apkPath) async {
+    return LiontronPlatform.instance.installApplication(apkPath);
+  }
+
+  /// 设置应用保活
+  Future<bool?> setKeepAlive(
+    String packageName, {
+    bool? unset = false,
+    int? delaySeconds = 5,
+    bool? foreground = true,
+  }) async {
+    return LiontronPlatform.instance.setKeepAlive(
+      packageName,
+      unset: unset,
+      delaySeconds: delaySeconds,
+      foreground: foreground,
+    );
+  }
+
+  /// 设置开机自启动
+  Future<bool?> setBoot(
+    String packageName, {
+    bool? unset = false,
+    int? delaySeconds = 5,
+  }) async {
+    return LiontronPlatform.instance.setBoot(
+      packageName,
+      unset: unset,
+      delaySeconds: delaySeconds,
+    );
+  }
 }
